@@ -31,7 +31,8 @@ class App extends React.Component {
   checkUserLoggedIn = async () => {
     console.log('Checking if user logged in')
     try {
-      const { data } = await axios.get("/auth/isUserLoggedIn")
+      const API_URL = process.env.REACT_APP_API_URL;
+      const { data } = await axios.get(`${API_URL}/auth/isUserLoggedIn`)
       this.setUser(data.payload)
     } catch (err) {
       // User does not have an active session in the backend. User is logged out so set loadingUser to false.
@@ -46,7 +47,8 @@ class App extends React.Component {
   logoutUser = async () => {
     console.log('logging out user')
     try {
-      await axios.get('/auth/logout')
+      const API_URL = process.env.REACT_APP_API_URL;
+      await axios.get(`${API_URL}/auth/logout`)
       this.setState({
         user: null,
         isUserLoggedIn: false

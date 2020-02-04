@@ -23,7 +23,8 @@ class AuthContainer extends Component {
     // then login user
     console.log('Signingup user')
     try {
-      await axios.post('/auth/signup', this.state)
+      const API_URL = process.env.REACT_APP_API_URL;
+      await axios.post(`${API_URL}/auth/signup`, this.state)
       this.loginUser()
 
     } catch (err) {
@@ -35,7 +36,8 @@ class AuthContainer extends Component {
     // Make network request to /auth/login to login user
     console.log('Logging user')
     try {
-      const { data } = await axios.post('/auth/login', this.state)
+      const API_URL = process.env.REACT_APP_API_URL;
+      const { data } = await axios.post(`${API_URL}/auth/login`, this.state)
 
       const user = data.payload
       this.props.setUser(user)
